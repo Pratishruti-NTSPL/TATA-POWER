@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+
+    # rewrite base to entire site for development
+    #RewriteRule AirbusC295/$ airbus-c295.php
+    #RewriteRule AirbusH125/$ airbus-h125.php
+    #RewriteRule Naval Utility Helicopter/$ naval-utility.php
+    #RewriteRule Unmanned Ariel System/$ Unnamed-Ariel-system.php
+    #RewriteRule Fixed and Rotary Wing Platforms/$ Unnamed-Ariel-System.php
+
+</IfModule>

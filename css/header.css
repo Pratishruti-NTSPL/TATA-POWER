@@ -1,0 +1,1574 @@
+/* ==========================================================================
+   TABLE OF CONTENTS:
+   1. HEADER: FIXED OVERLAY & CONTAINER
+   2. CONTROLS: HAMBURGER, DIVIDER & ACCESSIBILITY
+   3. NAVIGATION PILL & HOVER INTERACTIONS
+   4. MEGAMENU DROPDOWNS & PREVIEW CARDS
+   5. HEADER SCROLL TRIGGER STATES & INTERNAL PAGES
+   6. OFFCANVAS SIDEBAR NAVIGATION
+   7. BALCO ACCESSIBILITY FLYOUT MODAL
+   ========================================================================== */
+
+
+
+
+@media (min-width: 1600px) {
+
+    .container,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container-xl,
+    .container-xxl {
+        max-width: 1455px !important;
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #ffffff;
+    /* font-family: "Plus Jakarta Sans", sans-serif; */
+    font-family: "Kanit", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 29px;
+    color: #767474;
+}
+
+a {
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.section {
+    width: 100%;
+    padding-top: 120px;
+    padding-bottom: 130px;
+    background: #ffffff;
+}
+
+.section-tag {
+    font-size: 20px;
+    color: #1f4e9c;
+    font-family: "Kanit", sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.section-main-heading {
+    font-size: 55px;
+    color: #000000;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: 400;
+    margin: 0;
+    margin-bottom: 28px;
+}
+
+.section-main-heading span {
+    display: block;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: 800;
+}
+
+
+
+
+/* ==============================================================
+   1. HEADER: FIXED OVERLAY & CONTAINER
+   ============================================================== */
+
+.header {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    padding: 0;
+    background: transparent;
+    pointer-events: none;
+    transition: transform 0.35s ease, opacity 0.35s ease, background 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease, top 0.3s ease;
+}
+
+.header:not(.header-solid) {
+    top: 36px;
+}
+
+.header .container-fluid {
+    padding-left: 50px;
+    padding-right: 53px;
+}
+
+.header .container-fluid,
+.header a,
+.header button {
+    pointer-events: auto;
+}
+
+.header-left-wrapper {
+    display: inline-flex;
+    align-items: center;
+    height: 50px;
+    margin: 0;
+}
+
+/* ==============================================================
+   2. CONTROLS: HAMBURGER, DIVIDER & ACCESSIBILITY
+   ============================================================== */
+.header-left {
+    display: inline-flex;
+    align-items: center;
+    height: 50px;
+}
+
+/* Hamburger Button */
+.hamburger-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 50px;
+    flex-shrink: 0;
+}
+
+.hamburger-btn svg,
+.header-left svg {
+    display: block;
+    cursor: pointer;
+    transition: transform 0.25s ease;
+}
+
+.hamburger-btn:hover svg,
+.header-left svg:hover {
+    transform: scale(1.08);
+}
+
+.hamburger-btn svg path,
+.header-left svg path {
+    stroke: #ffffff;
+    transition: stroke 0.3s ease;
+}
+
+
+
+/* Vertical Divider */
+.header-left .divider {
+    display: inline-block;
+    width: 2px;
+    height: 38px;
+    background-color: rgba(255, 255, 255, 0.4);
+    align-self: center;
+    flex-shrink: 0;
+    margin-left: 21px;
+    margin-right: 26px;
+}
+
+/* Accessibility Control */
+.a11y-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 51px;
+    width: 26px;
+    flex-shrink: 0;
+}
+
+.a11y-icon-img {
+    width: 25px;
+    height: 31px;
+    object-fit: contain;
+    display: block;
+    filter: brightness(0) invert(1);
+    transform-origin: center center;
+}
+
+.a11y-btn:hover .a11y-icon-img {
+    animation: a11yHoverShake 0.4s ease-in-out;
+}
+
+@keyframes a11yHoverShake {
+    0% {
+        transform: translateX(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateX(-3px) rotate(-3deg);
+    }
+
+    50% {
+        transform: translateX(3px) rotate(3deg);
+    }
+
+    75% {
+        transform: translateX(-1.5px) rotate(-1.5deg);
+    }
+
+    100% {
+        transform: translateX(0) rotate(0deg);
+    }
+}
+
+/* ==============================================================
+   3. NAVIGATION PILL & HOVER INTERACTIONS
+   ============================================================== */
+.nav-pill {
+    position: static;
+    height: 51px;
+    background: rgba(255, 255, 255, 0.16);
+    border-radius: 10px;
+    padding: 0px 20px;
+    margin-left: 28px;
+    display: inline-flex;
+    align-items: center;
+    align-self: center;
+    flex-shrink: 0;
+}
+
+.nav-menu {
+    gap: 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.header .nav-link {
+    font-size: 16px;
+    color: #ffffff;
+    opacity: 1;
+    text-decoration: none;
+    padding: 0 6px;
+    height: 100%;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+    font-family: "Kanit", sans-serif;
+    transition: none;
+}
+
+.header .nav-link:hover,
+.header .nav-item:hover>.nav-link {
+    color: #ffffff;
+    opacity: 1;
+}
+
+.header .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 6px;
+    right: 6px;
+    height: 2px;
+    background-color: #ffffff;
+    transform: scaleX(0) translateZ(0);
+    transform-origin: center;
+    transition: transform 0.28s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.header .nav-link:hover::after,
+.header .nav-item:hover>.nav-link::after {
+    transform: scaleX(1) translateZ(0);
+}
+
+.header.header-solid .nav-link::after {
+    background-color: #0066cc;
+}
+
+/* Vertical Text Roll Animation */
+.header .nav-link .at-link-swap,
+.header .nav-link .nav-text-swap {
+    --link-desc-room: 3px;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: middle;
+    line-height: inherit;
+    padding-bottom: var(--link-desc-room);
+}
+
+.header .nav-link .at-link-swap .text-1,
+.header .nav-link .at-link-swap .text-2,
+.header .nav-link .nav-text-swap .text-1,
+.header .nav-link .nav-text-swap .text-2 {
+    display: block;
+    line-height: inherit;
+    transition: transform 0.45s cubic-bezier(0.5, 1.5, 0.35, 1);
+}
+
+.header .nav-link .at-link-swap .text-1,
+.header .nav-link .nav-text-swap .text-1 {
+    position: relative;
+}
+
+.header .nav-link .at-link-swap .text-2,
+.header .nav-link .nav-text-swap .text-2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(calc(100% + var(--link-desc-room)));
+}
+
+.header .nav-link:hover .at-link-swap .text-1,
+.header .nav-item:hover>.nav-link .at-link-swap .text-1,
+.header .nav-link:hover .nav-text-swap .text-1,
+.header .nav-item:hover>.nav-link .nav-text-swap .text-1 {
+    transform: translateY(calc(-100% - var(--link-desc-room)));
+}
+
+.header .nav-link:hover .at-link-swap .text-2,
+.header .nav-item:hover>.nav-link .at-link-swap .text-2,
+.header .nav-link:hover .nav-text-swap .text-2,
+.header .nav-item:hover>.nav-link .nav-text-swap .text-2 {
+    transform: translateY(0);
+}
+
+.nav-corner-icon {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-left: 3px;
+    flex-shrink: 0;
+    background-image: url('../images/Banner/Nav Corner svg.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle;
+    transform: translateY(3px);
+    transition: transform 0.25s ease, filter 0.3s ease;
+}
+
+.header .nav-link:hover .nav-corner-icon,
+.header .nav-item:hover>.nav-link .nav-corner-icon {
+    transform: translateY(3px) translate(1px, 1px);
+}
+
+.header.header-solid .nav-corner-icon {
+    filter: brightness(0);
+}
+
+.header-right .logo-img {
+    width: 195px;
+    height: 49px;
+    object-fit: contain;
+    display: block;
+    margin-bottom: -2px;
+}
+
+.header:not(.header-solid) .logo-blue {
+    display: none;
+}
+
+.header:not(.header-solid) .logo-white {
+    display: block;
+    filter: brightness(0) invert(1);
+}
+
+/* ==============================================================
+   4. PURE CSS FULL-WIDTH MEGAMENU 
+   ============================================================== */
+
+/* Make parent elements static so dropdown sizes to .header */
+.header .container-fluid,
+.header .nav-pill,
+.header .nav-menu,
+.header .nav-item {
+    position: static !important;
+}
+
+/* Dropdown Container: Increased to 490px so all 7 columns fit without cutting off */
+.megamenu-dropdown {
+    position: absolute;
+    top: calc(100% + 7px);
+    left: 50px;
+    right: 53px;
+    height: 490px;
+    z-index: 99999;
+    border-radius: 14px;
+    background: #ffffff;
+    border: 1px solid rgba(15, 27, 45, 0.08);
+    box-shadow: 0 34px 70px -22px rgba(7, 26, 54, 0.4), 0 2px 8px rgba(7, 26, 54, 0.08);
+    display: grid;
+    grid-template-columns: 310px 1fr;
+    gap: 14px;
+    padding: 8px;
+    box-sizing: border-box;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(6px);
+    transition: opacity 0.22s ease, transform 0.24s ease, visibility 0.22s;
+}
+
+/* Hover Bridge: Keeps dropdown open when moving mouse from nav link */
+.megamenu-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -24px;
+    left: 0;
+    right: 0;
+    height: 26px;
+    background: transparent;
+    pointer-events: auto;
+}
+
+/* Hover Trigger */
+.nav-item.has-megamenu:hover .megamenu-dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* Triangle Notch (uses your current JS --nx positioning) */
+.mm-notch {
+    position: absolute;
+    top: -6px;
+    left: var(--nx, 50%);
+    width: 14px;
+    height: 14px;
+    margin-left: -7px;
+    background: #ffffff;
+    border-top: 1px solid rgba(15, 27, 45, 0.08);
+    border-left: 1px solid rgba(15, 27, 45, 0.08);
+    border-radius: 2px 0 0 0;
+    transform: rotate(45deg);
+    z-index: 1;
+}
+
+/* Left Photo Card: Identical 310px width & 100% height for all 4 menus */
+.megamenu-topbar {
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+    background: #071a36;
+}
+
+.mm-topbar-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s ease;
+}
+
+.nav-item.has-megamenu:hover .mm-topbar-img {
+    transform: scale(1.04);
+}
+
+/* Gradient Overlay */
+.megamenu-topbar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(7, 26, 54, 0.1) 0%, rgba(7, 26, 54, 0.45) 50%, rgba(7, 26, 54, 0.95) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Title on top of Photo */
+.mm-topbar-caption {
+    position: absolute;
+    left: 24px;
+    bottom: 24px;
+    right: 24px;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.mm-topbar-line {
+    display: block;
+    width: 32px;
+    height: 2px;
+    background: #7fb0ff;
+    margin-bottom: 10px;
+}
+
+.mm-topbar-title {
+    margin: 0;
+    font-family: "Kanit", sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Right Columns Layout (3 Columns default) */
+.megamenu-columns {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px 20px;
+    align-items: start;
+    height: 100%;
+    padding: 18px 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+/* 5 Columns Layout (Airborne Platforms) */
+.megamenu-dropdown[data-cols="5"] .megamenu-columns {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px 16px;
+    padding: 18px 16px;
+}
+
+/* 7 Columns Layout (Defence & Security) */
+.megamenu-dropdown[data-cols="7"] .megamenu-columns {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 8px 12px;
+    padding: 16px 12px;
+}
+
+.megamenu-col-head {
+    display: flex;
+    align-items: center;
+    min-height: 34px;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e8edf3;
+}
+
+.megamenu-col-head::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    margin-right: 8px;
+    border-radius: 1px;
+    background: #1e69d8;
+    flex-shrink: 0;
+}
+
+/* Column Header Typography */
+.megamenu-col-title-link {
+    font-family: "Kanit", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #0f1b2d;
+    text-decoration: none;
+    line-height: 1.25;
+}
+
+.megamenu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+/* Submenu Links Typography */
+.megamenu-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 6px;
+    border-radius: 6px;
+    font-family: "Kanit", sans-serif;
+    font-size: 16px;
+    color: #55657d;
+    text-decoration: none;
+    line-height: 1.3;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.megamenu-link:hover {
+    background: #f3f5f9;
+    color: #0a3873;
+}
+
+.header .nav-item.has-megamenu:hover>.nav-link::after {
+    transform: scaleX(1) translateZ(0);
+}
+
+@media (max-width: 991px) {
+    .megamenu-dropdown {
+        display: none !important;
+    }
+}
+
+/* ==============================================================
+   5. HEADER SCROLL TRIGGER STATES & INTERNAL PAGES
+   ============================================================== */
+.header.header-hidden {
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.header.header-solid {
+    transform: translateY(0);
+    opacity: 1;
+    top: 0;
+    padding: 10px 0;
+    background: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    pointer-events: auto;
+}
+
+.header.header-solid .nav-link {
+    color: #1a202c;
+}
+
+.header.header-solid .nav-link::after {
+    background-color: #0066cc;
+}
+
+.header.header-solid .nav-link:hover,
+.header.header-solid .nav-item:hover>.nav-link {
+    color: #0066cc;
+}
+
+.header.header-solid .nav-pill {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+.header.header-solid .hamburger-bar-img {
+    filter: brightness(0);
+}
+
+.header.header-solid .header-left .divider {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.header.header-solid .a11y-icon-img {
+    filter: brightness(0);
+}
+
+.header.header-solid .logo-white {
+    display: none;
+}
+
+.header.header-solid .logo-blue {
+    display: block;
+    filter: none;
+}
+
+.header.header-solid .hamburger-btn svg path,
+.header.header-solid .header-left svg path {
+    stroke: #1a202c;
+}
+
+/* --- Internal Pages Layout (Clean White, 50px/53px Alignment, Bottom Border) --- */
+
+
+
+/* 1. At Top / Not Scrolled: Full Width (50px / 53px), Visible Border Bottom (#1d89c8) */
+.inner-page .header {
+    top: 0;
+    padding: 14px 0 0 0;
+    background: transparent;
+    border-bottom: none;
+    box-shadow: none;
+}
+
+.inner-page .header .container-fluid {
+    padding-left: 50px !important;
+    padding-right: 53px !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    border-bottom: 1px solid #cadfeb;
+    padding-bottom: 14px;
+}
+
+/* 2. On Scroll: Solid White Background, Normal Box-Shadow, No Border */
+.inner-page .header.header-solid {
+    top: 0;
+    padding: 10px 0;
+    background: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.inner-page .header.header-solid .container-fluid {
+    padding-left: 50px !important;
+    padding-right: 53px !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+}
+
+/* Nav Pill on Internal Pages */
+.inner-page .header .nav-pill,
+.inner-page .header .nav-pill {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    margin-left: 28px;
+    padding: 0 20px;
+    height: 51px;
+}
+
+/* Nav Link Dark Typography on Internal Pages */
+.inner-page .header .nav-link {
+    color: #1a202c;
+}
+
+.inner-page .header .nav-link:hover,
+.inner-page .header .nav-item:hover>.nav-link {
+    color: #0066cc;
+}
+
+.inner-page .header .nav-link::after {
+    background-color: #0066cc;
+}
+
+.inner-page .header .nav-corner-icon {
+    filter: brightness(0);
+}
+
+/* Brand Logo Swapping */
+.inner-page .header .logo-white,
+.inner-page .header .logo-white {
+    display: none;
+}
+
+.inner-page .header .logo-blue,
+.inner-page .header.logo-blue {
+    display: block;
+    filter: none;
+}
+
+/* Controls & Icons */
+.inner-page .header .header-menu-btn svg path,
+.inner-page .header .header-left svg path,
+.inner-page .header .hamburger-btn svg path {
+    stroke: #1a202c;
+}
+
+.inner-page .header .a11y-icon-img,
+.inner-page .header .hamburger-bar-img {
+    filter: brightness(0);
+}
+
+.inner-page .header .header-left .divider {
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive padding for tablet and mobile */
+@media (max-width: 991px) {
+
+    .inner-page .header .container-fluid,
+    .inner-page .header .container-fluid,
+    .inner-page .header.header-solid .container-fluid {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+}
+
+
+
+  
+
+/* 1. On Scroll: Position underline on the header baseline */
+.header.header-solid .nav-link::after {
+    bottom: -11.9px !important;
+    background-color: #0066cc;
+}
+
+/* 2. On Inner Pages before scroll */
+.inner-page .header:not(.header-solid) .nav-link::after {
+    bottom: -14px !important;
+    background-color: #0066cc;
+}
+
+/* 3. Restores the exact 7px floating gap between the underline and megamenu card */
+.header.header-solid .megamenu-dropdown,
+.inner-page .header .megamenu-dropdown {
+    top: calc(100% + 7px) !important;
+}
+
+/* ==============================================================
+  6. OFFCANVAS SIDEBAR NAVIGATION
+   ============================================================== */
+html {
+    scrollbar-gutter: stable;
+}
+
+/* Header Menu Button Controls */
+button#openTaslMenuBtn,
+button.header-menu-btn,
+button.hamburger-open-btn {
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 50px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+button#openTaslMenuBtn:focus,
+button#openTaslMenuBtn:active,
+button.header-menu-btn:focus,
+button.header-menu-btn:active,
+button.hamburger-open-btn:focus,
+button.hamburger-open-btn:active {
+    outline: 0;
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+}
+
+.header-menu-btn svg {
+    display: block;
+    cursor: pointer;
+    transition: transform 0.25s ease;
+}
+
+.header-menu-btn:hover svg {
+    transform: scale(1.1);
+}
+
+.header-menu-btn svg path {
+    stroke: #ffffff;
+    transition: stroke 0.3s ease;
+}
+
+.header.header-solid .header-menu-btn svg path {
+    stroke: #1a202c;
+}
+
+/* Backdrop Overlay */
+.tasl-backdrop-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(12, 68, 151, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 99998;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Offcanvas Sidebar Area */
+.tasl-sidebar-area {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 100%;
+    z-index: 99999;
+    pointer-events: none;
+}
+
+/* Frosted Drawer Card */
+.tasl-sidebar-area .tasl-sidebar-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 20px;
+    width: 570px;
+    height: calc(100vh - 40px);
+    border-radius: 20px;
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    background: rgba(10, 56, 115, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 24px 50px -10px rgba(6, 34, 76, 0.75);
+    clip-path: circle(0% at 55px 50px);
+    z-index: 2;
+    transition: none !important;
+}
+
+.tasl-sidebar-wrapper {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 570px;
+    height: calc(100vh - 40px);
+    padding: 38px 45px 30px 45px;
+    z-index: 3;
+    clip-path: circle(0% at 55px 50px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: none !important;
+}
+
+.tasl-sidebar-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.tasl-sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    margin-bottom: 45px;
+    padding-bottom: 0;
+    width: 100%;
+}
+
+.tasl-sidebar-logo {
+    height: 42px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+.tasl-sidebar-close {
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transform-origin: center center;
+    transition: color 0.25s ease;
+}
+
+.tasl-sidebar-close:hover {
+    color: #4da5ff;
+}
+
+/* Scrollable Navigation Menu */
+.tasl-sidebar-nav {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-right: 6px;
+    margin-bottom: 0;
+}
+
+.tasl-sidebar-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.tasl-sidebar-nav ul {
+    list-style: none;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}
+
+.tasl-sidebar-nav ul li {
+    position: relative;
+    margin-bottom: 12px;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}
+
+.tasl-nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 36px;
+    padding: 4px 0;
+    margin-left: 0 !important;
+}
+
+.tasl-nav-row>a {
+    flex: 1 1 auto;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0;
+    color: #ffffff;
+    text-decoration: none;
+    font-family: "Kanit", sans-serif;
+    transition: color 0.25s ease, transform 0.25s ease;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+
+.tasl-nav-row>a:hover,
+.tasl-sidebar-nav ul li.active .tasl-nav-row>a {
+    color: #4da5ff;
+    transform: translateX(4px);
+}
+
+/* Submenu Accordion Toggle Button */
+.tasl-accordion-btn {
+    position: static !important;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 0 0 16px !important;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+}
+
+.tasl-accordion-btn .tasl-accordion-plus {
+    width: 16px;
+    height: 16px;
+    display: block;
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), stroke 0.25s ease;
+}
+
+.tasl-sidebar-nav ul li.active .tasl-accordion-btn .tasl-accordion-plus {
+    transform: rotate(45deg);
+    stroke: #4da5ff;
+}
+
+/* Submenu Container */
+.tasl-sidebar-nav ul li .tasl-submenu {
+    display: none;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    margin-top: 14px;
+    margin-bottom: 12px;
+}
+
+.tasl-submenu-group {
+    margin-top: 0;
+    margin-bottom: 24px;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}
+
+.tasl-submenu-title-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    padding-bottom: 8px;
+    margin-bottom: 11px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    width: 100%;
+}
+
+.tasl-submenu-title {
+    font-size: 16.5px;
+    font-weight: 500;
+    text-transform: none !important;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+    font-family: "Kanit", sans-serif;
+}
+
+.tasl-submenu-title-wrap svg {
+    color: #ffffff;
+    opacity: 0.7;
+    transition: transform 0.25s ease;
+}
+
+.tasl-submenu-group:hover .tasl-submenu-title-wrap svg {
+    transform: translate(2px, -2px);
+    color: #4da5ff;
+}
+
+.tasl-submenu-group ul {
+    list-style: none;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}
+
+.tasl-submenu-group ul li {
+    border-bottom: none;
+    margin-bottom: 0px !important;
+    padding: 0 !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    line-height: 1.2 !important;
+}
+
+.tasl-submenu-group ul li a {
+    position: relative;
+    padding: 3px 0 3px 18px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s ease;
+}
+
+.tasl-submenu-group ul li a::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 16px;
+}
+
+.tasl-submenu-group ul li a:hover {
+    color: #4da5ff;
+    transform: translateX(6px);
+}
+
+.tasl-submenu-group ul li a:hover::before {
+    color: #4da5ff;
+}
+
+/* Mobile Responsive Sidebar */
+@media (max-width: 768px) {
+
+    .tasl-sidebar-area,
+    .tasl-sidebar-area .tasl-sidebar-bg,
+    .tasl-sidebar-wrapper {
+        width: 100vw;
+        max-width: 100vw;
+        margin: 0;
+        top: 0;
+        left: 0;
+        border-radius: 0;
+    }
+
+    .tasl-nav-row>a {
+        font-size: 28px;
+    }
+}
+
+/* ==========================================================================
+   7. BALCO ACCESSIBILITY FLYOUT MODAL (CONSOLIDATED & DEDUPLICATED)
+   ========================================================================== */
+
+/* 1. Backdrop Overlay */
+.tasl-a11y-overlay {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(7, 26, 54, 0.45);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 999998;
+    display: none;
+}
+
+.tasl-a11y-overlay.is-open {
+    display: block;
+}
+
+/* 2. Modal Frame (Exact Balco Dimensions & Styling) */
+.tasl-a11y-modal {
+    position: fixed;
+    top: 25px;
+    left: 25px;
+    width: 410px;
+    max-width: calc(100vw - 35px);
+    max-height: calc(100vh - 50px);
+    background: #002d5b;
+    border-radius: 20px;
+    box-shadow: 0 25px 60px -10px rgba(5, 28, 58, 0.55), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    z-index: 999999;
+    overflow: hidden;
+    display: none;
+    flex-direction: column;
+    pointer-events: auto;
+}
+
+.tasl-a11y-modal * {
+    pointer-events: auto;
+}
+
+.tasl-a11y-modal.is-open {
+    display: flex;
+    animation: a11yBalcoPop 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes a11yBalcoPop {
+    from {
+        opacity: 0;
+        transform: translateY(-14px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* 3. Balco Navy Top Header */
+.tasl-a11y-header {
+    background: #002d5b;
+    padding: 24px 20px 18px;
+    text-align: center;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.tasl-a11y-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 4px 8px;
+    font-size: 26px;
+    line-height: 1;
+    opacity: 0.85;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.tasl-a11y-close:hover {
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+.tasl-a11y-title {
+    color: #ffffff;
+    font-family: "Inter", "Kanit", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 14px 0;
+    line-height: 1.2;
+}
+
+.tasl-a11y-reset-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    border: none;
+    border-radius: 999px;
+    padding: 7px 22px;
+    font-family: "Inter", "Kanit", sans-serif;
+    font-size: 16 px;
+    font-weight: 600;
+    color: #002d5b;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+    transition: all 0.2s ease;
+}
+
+.tasl-a11y-reset-btn:hover {
+    background: #f1f5f9;
+    transform: translateY(-1px);
+}
+
+/* 4. White Scrollable Body */
+.tasl-a11y-body {
+    background: #ffffff;
+    border-radius: 20px 20px 0 0;
+    padding: 24px 18px 22px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    flex: 1 1 auto;
+}
+
+.tasl-a11y-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.tasl-a11y-body::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 999px;
+}
+
+/* 5. Section Titles */
+.tasl-a11y-section:not(:last-child) {
+    margin-bottom: 24px;
+}
+
+.tasl-a11y-section-title {
+    display: block;
+    font-family: "Inter", "Kanit", sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #64748b;
+    margin: 0 0 14px 0;
+    letter-spacing: -0.01em;
+}
+
+/* 6. Cards Grid */
+.tasl-a11y-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.tasl-a11y-grid.a11y-grid-2col {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+/* 7. Card Design */
+.tasl-a11y-card {
+    background: #f0f7fe;
+    border: 1.5px solid transparent;
+    border-radius: 14px;
+    padding: 16px 6px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    min-height: 98px;
+    transition: all 0.2s ease;
+    user-select: none;
+    width: 100%;
+}
+
+.tasl-a11y-card:hover {
+    background: #e4f1fd;
+    border-color: #006cb8;
+    transform: translateY(-2px);
+}
+
+.tasl-a11y-card.is-active {
+    background: #e1effe;
+    border: 2px solid #006cb8;
+    box-shadow: 0 0 0 1px #006cb8, 0 4px 12px rgba(0, 108, 184, 0.15);
+}
+
+/* 8. Card Icons & Labels */
+.tasl-a11y-card .card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    margin-bottom: 8px;
+    color: #000000;
+    transition: color 0.2s ease;
+}
+
+.tasl-a11y-card.is-active .card-icon {
+    color: #006cb8;
+}
+
+.tasl-a11y-card .font-glyph {
+    font-family: "Inter", sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: #000000;
+    line-height: 1;
+}
+
+.tasl-a11y-card.is-active .font-glyph {
+    color: #006cb8;
+}
+
+.tasl-a11y-card .glyph-sup {
+    font-size: 16px;
+    font-weight: 900;
+    vertical-align: super;
+}
+
+.tasl-a11y-card .title-glyph {
+    font-family: "Times New Roman", Georgia, serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #000000;
+    line-height: 1;
+}
+
+.tasl-a11y-card.is-active .title-glyph {
+    color: #006cb8;
+}
+
+.tasl-a11y-card .card-label {
+    font-family: "Inter", "Kanit", sans-serif;
+    font-size: 11.5px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: #1e293b;
+    text-align: center;
+    transition: color 0.2s ease;
+}
+
+.tasl-a11y-card.is-active .card-label {
+    color: #006cb8;
+}
+
+/* 9. Palette Cards */
+.a11y-palette-card {
+    grid-column: span 2;
+    padding: 12px 10px 10px;
+    min-height: 98px;
+}
+
+.a11y-palette-title {
+    font-family: "Inter", "Kanit", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.a11y-palette-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin-bottom: 8px;
+}
+
+.a11y-palette-dots .dot-swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.a11y-palette-dots .dot-swatch:hover {
+    transform: scale(1.25);
+}
+
+.a11y-palette-cancel {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #475569;
+    padding: 2px 14px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.a11y-palette-cancel:hover {
+    background: #f1f5f9;
+}
+
+/* 10. Live Accessibility Filter & Contrast Engine Overrides */
+html.a11y-titles-active h1,
+html.a11y-titles-active h2,
+html.a11y-titles-active h3,
+html.a11y-titles-active h4,
+html.a11y-titles-active h5,
+html.a11y-titles-active h6,
+html.a11y-titles-active .section-title,
+html.a11y-titles-active .banner-title,
+html.a11y-titles-active [class*="heading"],
+html.a11y-titles-active [class*="title"]:not(.tasl-a11y-title):not(.tasl-a11y-section-title):not(.a11y-palette-title) {
+    outline: 2px dashed #006cb8 !important;
+    outline-offset: 4px !important;
+    background-color: rgba(0, 108, 184, 0.08) !important;
+}
+
+html.a11y-links-active a:not(.tasl-a11y-modal a) {
+    background-color: #ffeb3b !important;
+    color: #000000 !important;
+    text-decoration: underline 3px solid #006cb8 !important;
+    text-underline-offset: 3px !important;
+    font-weight: 700 !important;
+}
+
+html.a11y-magnifier-active p,
+html.a11y-magnifier-active span:not(.tasl-a11y-modal span),
+html.a11y-magnifier-active a:not(.tasl-a11y-modal a),
+html.a11y-magnifier-active li {
+    letter-spacing: 0.08em !important;
+    line-height: 2 !important;
+    word-spacing: 0.15em !important;
+}
+
+html.a11y-hover-active *:hover:not(.tasl-a11y-modal *):not(.tasl-a11y-overlay) {
+    outline: 2px solid #006cb8 !important;
+    outline-offset: 2px !important;
+}
+
+html.a11y-hide-img-active img:not(.tasl-a11y-modal img):not(.a11y-btn img),
+html.a11y-hide-img-active svg:not(.tasl-a11y-modal svg):not(.a11y-btn svg),
+html.a11y-hide-img-active [style*="background-image"]:not(.tasl-a11y-modal *),
+html.a11y-hide-img-active picture,
+html.a11y-hide-img-active video {
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+html.a11y-cur-black-active,
+html.a11y-cur-black-active * {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 24 24' fill='%23000000' stroke='%23ffffff' stroke-width='1.5'%3E%3Cpath d='M4.5 3.5l12 9.5-6.5 1 4 7-2.5 1.5-4-7-3 3z'/%3E%3C/svg%3E"), auto !important;
+}
+
+html.a11y-cur-white-active,
+html.a11y-cur-white-active * {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 24 24' fill='%23ffffff' stroke='%23000000' stroke-width='1.5'%3E%3Cpath d='M4.5 3.5l12 9.5-6.5 1 4 7-2.5 1.5-4-7-3 3z'/%3E%3C/svg%3E"), auto !important;
+}
+
+html.a11y-light-contrast {
+    filter: contrast(135%) brightness(108%) !important;
+}
+
+html.a11y-dark-contrast {
+    filter: invert(1) hue-rotate(180deg) !important;
+    background-color: #000000 !important;
+}
+
+html.a11y-dark-contrast img,
+html.a11y-dark-contrast video,
+html.a11y-dark-contrast picture,
+html.a11y-dark-contrast svg,
+html.a11y-dark-contrast .banner-img,
+html.a11y-dark-contrast .tasl-a11y-modal {
+    filter: invert(1) hue-rotate(180deg) !important;
+}
+
+html.a11y-high-contrast {
+    filter: contrast(175%) !important;
+}
+
+html.a11y-mono-contrast {
+    filter: grayscale(100%) !important;
+}
+
+html.a11y-sat-contrast {
+    filter: saturate(200%) !important;
+}
+
+@media (max-width: 576px) {
+    .tasl-a11y-modal {
+        top: 15px;
+        left: 15px;
+        width: calc(100vw - 30px);
+        height: calc(100vh - 30px);
+        max-height: calc(100vh - 30px);
+    }
+}
